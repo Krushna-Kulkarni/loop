@@ -9,7 +9,7 @@ const Searchbar = () => {
         type="text"
         placeholder="Search videos..."
       />
-      <button className=" bg-zinc-800 px-2 py-1 rounded-r-md">
+      <button className=" bg-zinc-800 px-2 py-1 rounded-r-md border-l border-gray-600">
         <SearchIcon />
       </button>
     </div>
