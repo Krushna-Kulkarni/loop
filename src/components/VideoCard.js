@@ -1,10 +1,15 @@
 import React from "react";
 // import getVideoDuration from "./helperFunctions.js";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useNavigate } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
+  const Navigate = useNavigate();
   return (
-    <div className="w-full  sm:w-[358px] md:w-[380px] flex flex-col cursor-pointer border-b border-black  rounded-b-md   group  ">
+    <div
+      onClick={() => Navigate(`/video/${video.id}`)}
+      className="w-full  sm:w-[358px] md:w-[380px] flex flex-col cursor-pointer border-b border-black  rounded-b-md group"
+    >
       <div className="flex justify-center items-center">
         <img
           src={video.thumb}
