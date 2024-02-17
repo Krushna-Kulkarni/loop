@@ -13,7 +13,7 @@ function App() {
           <Sidebar />
         </div>
         <Routes>
-          <Route path="/" component={<Feed />} />
+          <Route path="/" element={<Feed />} />
         </Routes>
       </div>
     </div>
