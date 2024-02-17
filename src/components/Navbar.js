@@ -3,10 +3,10 @@ import Searchbar from "./Searchbar";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center h-20 p-2 pl-8 border-b border-gray-600 bg-black">
+    <div className="flex items-center p-2 pl-8  bg-black sticky h-20 top-0 z-20">
       <div className="flex items-center text-xl gap-2">
         <img
-          className="w-12 h-"
+          className="w-12"
           src={require("../assets/images/logo.png")}
           alt="brand-logo"
         />
