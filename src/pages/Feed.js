@@ -1,10 +1,10 @@
 import React from "react";
-import Videos from "./Videos";
+import Videos from "../components/Videos";
 
 const Feed = () => {
   const selectedCategory = "All";
   return (
-    <div className="flex flex-col flex-1 ml-12">
+    <div className="flex flex-col">
       <div className=" text-2xl sticky pb-2 top-20 bg-black h-10 z-20">
         <span className="text-red-600">{selectedCategory} </span>
         <span>Videos</span>
