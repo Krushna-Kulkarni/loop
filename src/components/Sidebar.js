@@ -6,7 +6,7 @@ const Sidebar = () => {
   let selectedTab = "Home";
   const Navigate = useNavigate();
   return (
-    <div className="flex flex-col overflow-y-auto  h-[90dvh] fixed w-64">
+    <div className="flex flex-col overflow-y-auto  h-[90dvh] fixed w-60">
       {tabs.map((tab) => (
         <button
           className="flex justify-start items-center  cursor-pointer bg-transparent px-4 py-3 pl-8   hover:bg-zinc-800 font-light"
