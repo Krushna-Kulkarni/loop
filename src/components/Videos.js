@@ -6,7 +6,9 @@ const Videos = () => {
   return (
     <div className="flex gap-x-8 gap-y-2 flex-wrap">
       {videos.map((video) => (
-        <VideoCard video={video} />
+        <div key={video.id}>
+          <VideoCard video={video} />
+        </div>
       ))}
     </div>
   );
