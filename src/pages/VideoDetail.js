@@ -11,7 +11,7 @@ const VideoDetail = () => {
   return (
     <div>
       <VideoPlayer currentVideo={currentVideo} />
-      <div className="flex flex-col justify-center w-[90%] max-w-[1000px] mx-auto p-2">
+      <div className="flex flex-col justify-center w-[68%] max-w-[1000px] mx-auto p-2">
         <span className="text-lg font-bold">{currentVideo?.title} </span>
         <span className="text-xs text-zinc-200">
           {currentVideo?.subtitle.slice(3)}

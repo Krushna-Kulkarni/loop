@@ -15,10 +15,10 @@ function App() {
     <div className="App">
       <Navbar />
       <div className="flex">
-        <div className="w-60">
+        <div className="w-60 mr-12">
           <Sidebar />
         </div>
-        <div className=" flex-1 ml-12">
+        <div className=" flex-1">
           <Routes>
             <Route path="/" element={<Feed />} />
             <Route path="/video/:id" element={<VideoDetail />} />
