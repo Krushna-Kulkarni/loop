@@ -6,6 +6,9 @@ import Crop32SharpIcon from "@mui/icons-material/Crop32Sharp";
 import Crop169SharpIcon from "@mui/icons-material/Crop169Sharp";
 import FullscreenSharpIcon from "@mui/icons-material/FullscreenSharp";
 import FullscreenExitSharpIcon from "@mui/icons-material/FullscreenExitSharp";
+import VolumeDownIcon from "@mui/icons-material/VolumeDown";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
 const VideoPlayer = ({ currentVideo }) => {
   const [isPaused, setIsPaused] = useState(false);
@@ -15,6 +18,10 @@ const VideoPlayer = ({ currentVideo }) => {
   const [fullScreenMode, setFullScreenMode] = useState(false);
   const [theaterMode, setTheaterMode] = useState(false);
   const [miniPlayerMode, setMiniPlayerMode] = useState(false);
+
+  const [volume, setVolume] = useState(0.5);
+  const [prevVolume, setPrevVolume] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
 
   function togglePlay() {
     setIsPaused((prevState) => !prevState);
@@ -49,6 +56,61 @@ const VideoPlayer = ({ currentVideo }) => {
     }
   }
 
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (!isMuted) {
+      videoRef.current.volume = newVolume;
+    }
+    if (isMuted && newVolume > 0) {
+      setIsMuted(false);
+      videoRef.current.volume = newVolume;
+    }
+  };
+
+  const toggleMute = () => {
+    if (!isMuted) {
+      setPrevVolume(volume);
+      setVolume(0);
+      videoRef.current.volume = 0;
+    } else {
+      setVolume(prevVolume);
+      videoRef.current.volume = prevVolume;
+    }
+    setIsMuted(!isMuted);
+  };
+
+  const getSpeakerIcon = () => {
+    if (isMuted || volume === 0) {
+      return (
+        <VolumeOffIcon
+          className="volume-muted-icon"
+          style={{
+            fontSize: "28",
+          }}
+        />
+      );
+    } else if (volume < 0.5) {
+      return (
+        <VolumeDownIcon
+          className="volume-low-icon"
+          style={{
+            fontSize: "28",
+          }}
+        />
+      );
+    } else {
+      return (
+        <VolumeUpIcon
+          className="volume-high-icon"
+          style={{
+            fontSize: "28",
+          }}
+        />
+      );
+    }
+  };
+
   return (
     <div
       ref={videoContainerRef}
@@ -73,6 +135,20 @@ const VideoPlayer = ({ currentVideo }) => {
               </span>
             )}
           </button>
+          <div className="volume-container flex items-center">
+            <button onClick={toggleMute} className="mute-btn">
+              {getSpeakerIcon()}
+            </button>
+            <input
+              className="volume-slider"
+              type="range"
+              min="0"
+              max="1"
+              step="any"
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+          </div>
           <button onClick={toggleMiniPlayerMode} className="mini-player-btn">
             <BrandingWatermarkOutlinedIcon style={{ fontSize: "28" }} />
           </button>
