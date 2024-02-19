@@ -29,6 +29,8 @@ const VideoPlayer = ({ currentVideo }) => {
 
   const [speed, setSpeed] = useState(1);
 
+  const [isScrubbing, setIsScrubbing] = useState(false);
+
   // keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -187,6 +189,9 @@ const VideoPlayer = ({ currentVideo }) => {
     setSpeed(newPlaybackRate);
   }
 
+  let previewPosition = 0.75;
+  let progressPosition = 0.25;
+
   return (
     <div
       ref={videoContainerRef}
@@ -195,7 +200,33 @@ const VideoPlayer = ({ currentVideo }) => {
       }`}
     >
       <div className="video-controls-container absolute bottom-0 left-0 right-0 text-white z-50 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 ">
-        <div className="timeline-container"></div>
+        <div className="timeline-container group/timelineContainer h-[5px] mx-2 cursor-pointer flex items-center">
+          <div
+            className={`timeline relative h-[3px] w-full bg-[#64646480] group-hover/timelineContainer:h-full ${
+              isScrubbing ?? "h-full"
+            }`}
+          >
+            <div
+              className={`absolute left-0 top-0 bottom-0 bg-gray-500 right-0
+       hidden group-hover/timelineContainer:block ${isScrubbing ?? "block"}`}
+              style={{ right: `calc(100% - ${previewPosition} * 100%)` }}
+            ></div>
+            <div
+              className="absolute left-0 top-0 bottom-0 bg-red-500 right-0"
+              style={{ right: `calc(100% - ${progressPosition} * 100%)` }}
+            ></div>
+            <div
+              className={`thumb-indicator scale-100 group-hover/timelineContainer:scale-125 absolute h-[200%] bg-red-500 rounded-full duration-150 ease-in-out ${
+                isScrubbing ?? "scale-150"
+              }`}
+              style={{
+                aspectRatio: "1/1",
+                top: "-50%",
+                left: `calc(${progressPosition} * 100%)`,
+              }}
+            ></div>
+          </div>
+        </div>
         <div className="controls flex gap-2 p-1 items-center">
           <button
             onClick={togglePlay}
