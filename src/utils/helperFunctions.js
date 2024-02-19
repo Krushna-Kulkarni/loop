@@ -2,10 +2,10 @@ const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
   minimumIntegerDigits: 2,
 });
 
-export function formatDuration(time) {
-  const seconds = Math.floor(time % 60);
-  const minutes = Math.floor(time / 60) % 60;
-  const hours = Math.floor(time / 360);
+export function formatDuration(timeInSeconds) {
+  const hours = Math.floor(timeInSeconds / 3600);
+  const minutes = Math.floor((timeInSeconds % 3600) / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
 
   if (hours === 0) {
     return `${minutes}:${leadingZeroFormatter.format(seconds)}`;
