@@ -15,6 +15,7 @@ const VideoPlayer = ({ currentVideo }) => {
   const [isPaused, setIsPaused] = useState(true);
   const videoRef = useRef(null);
   const videoContainerRef = useRef(null);
+  const timelineContainerRef = useRef(null);
 
   const [fullScreenMode, setFullScreenMode] = useState(false);
   const [theaterMode, setTheaterMode] = useState(false);
@@ -30,6 +31,8 @@ const VideoPlayer = ({ currentVideo }) => {
   const [speed, setSpeed] = useState(1);
 
   const [isScrubbing, setIsScrubbing] = useState(false);
+  const [previewPosition, setPreviewPosition] = useState();
+  const [progressPosition, setProgressPosition] = useState();
 
   // keyboard shortcuts
   useEffect(() => {
@@ -176,6 +179,8 @@ const VideoPlayer = ({ currentVideo }) => {
   }
   function setCurrentVideoDuration() {
     setCurrentTime(formatDuration(videoRef.current.currentTime));
+    const percent = videoRef.current.currentTime / videoRef.current.duration;
+    setProgressPosition(percent);
   }
 
   function skip(duration) {
@@ -189,8 +194,53 @@ const VideoPlayer = ({ currentVideo }) => {
     setSpeed(newPlaybackRate);
   }
 
-  let previewPosition = 0.75;
-  let progressPosition = 0.25;
+  useEffect(() => {
+    const handleMouseUp = (e) => {
+      if (isScrubbing) toggleScrubbing(e);
+    };
+
+    const handleMouseMove = (e) => {
+      if (isScrubbing) handleTimelineUpdate(e);
+    };
+
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+    // eslint-disable-next-line
+  }, [isScrubbing, toggleScrubbing]);
+
+  function toggleScrubbing(e) {
+    e.preventDefault();
+    setIsScrubbing(e.buttons === 1);
+    const rect = timelineContainerRef.current.getBoundingClientRect();
+    const percent =
+      Math.min(Math.max(0, e.clientX - rect.left), rect.width) / rect.width;
+
+    if (!isScrubbing) {
+      videoRef.current.currentTime = percent * videoRef.current.duration;
+      if (!videoRef.current.paused) videoRef.current.play();
+    }
+
+    handleTimelineUpdate(e);
+  }
+
+  function handleTimelineUpdate(e) {
+    const rect = timelineContainerRef.current.getBoundingClientRect();
+    const percent =
+      Math.min(Math.max(0, e.clientX - rect.left), rect.width) / rect.width;
+    setPreviewPosition(percent);
+
+    if (isScrubbing) {
+      e.preventDefault();
+      const newTime = percent * videoRef.current.duration;
+      setProgressPosition(percent);
+      videoRef.current.currentTime = newTime;
+    }
+  }
 
   return (
     <div
@@ -200,7 +250,12 @@ const VideoPlayer = ({ currentVideo }) => {
       }`}
     >
       <div className="video-controls-container absolute bottom-0 left-0 right-0 text-white z-50 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 ">
-        <div className="timeline-container group/timelineContainer h-[5px] mx-2 cursor-pointer flex items-center">
+        <div
+          ref={timelineContainerRef}
+          onMouseMove={handleTimelineUpdate}
+          onMouseDown={toggleScrubbing}
+          className="timeline-container group/timelineContainer h-[7px] mx-2 cursor-pointer flex items-center"
+        >
           <div
             className={`timeline relative h-[3px] w-full bg-[#64646480] group-hover/timelineContainer:h-full ${
               isScrubbing ?? "h-full"
@@ -216,7 +271,7 @@ const VideoPlayer = ({ currentVideo }) => {
               style={{ right: `calc(100% - ${progressPosition} * 100%)` }}
             ></div>
             <div
-              className={`thumb-indicator scale-100 group-hover/timelineContainer:scale-125 absolute h-[200%] bg-red-500 rounded-full duration-150 ease-in-out ${
+              className={`thumb-indicator scale-100 group-hover/timelineContainer:scale-125 absolute h-[200%] bg-red-500 rounded-full duration-50 ease-in-out ${
                 isScrubbing ?? "scale-150"
               }`}
               style={{
