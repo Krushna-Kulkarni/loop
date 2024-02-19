@@ -27,11 +27,12 @@ const VideoPlayer = ({ currentVideo }) => {
   const [currentTime, setCurrentTime] = useState("0:00");
   const [totalTime, setTotalTime] = useState("");
 
+  const [speed, setSpeed] = useState(1);
+
   // keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
-      console.log("Key pressed:", e.key);
-      if (!videoContainerRef.current) return; // Add a check for null
+      if (!videoContainerRef.current) return;
 
       const tagName = videoContainerRef.current.tagName.toLowerCase();
 
@@ -179,6 +180,13 @@ const VideoPlayer = ({ currentVideo }) => {
     videoRef.current.currentTime += duration;
   }
 
+  function changePlaybackSpeed() {
+    let newPlaybackRate = videoRef.current.playbackRate + 0.25;
+    if (newPlaybackRate > 2) newPlaybackRate = 0.25;
+    videoRef.current.playbackRate = newPlaybackRate;
+    setSpeed(newPlaybackRate);
+  }
+
   return (
     <div
       ref={videoContainerRef}
@@ -221,6 +229,10 @@ const VideoPlayer = ({ currentVideo }) => {
             <div className="current-time">{currentTime}</div>/
             <div className="total-time">{totalTime}</div>
           </div>
+          <button
+            onClick={changePlaybackSpeed}
+            className="speed-btn w-12"
+          >{`${speed}x`}</button>
           {!miniPlayerMode && (
             <button onClick={toggleMiniPlayerMode} className="mini-player-btn">
               <BrandingWatermarkOutlinedIcon style={{ fontSize: "28" }} />
