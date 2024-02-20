@@ -23,6 +23,7 @@
 
 .volume-slider {
   width: 3rem;
+  cursor: pointer;
 }
 
 @media (min-width: 992px) {
