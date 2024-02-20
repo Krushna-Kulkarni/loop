@@ -9,9 +9,10 @@ import FullscreenExitSharpIcon from "@mui/icons-material/FullscreenExitSharp";
 import VolumeDownIcon from "@mui/icons-material/VolumeDown";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { formatDuration } from "../utils/helperFunctions";
 
-const VideoPlayer = ({ currentVideo }) => {
+const VideoPlayer = ({ currentVideo, playNext }) => {
   const [isPaused, setIsPaused] = useState(true);
   const videoRef = useRef(null);
   const videoContainerRef = useRef(null);
@@ -245,8 +246,10 @@ const VideoPlayer = ({ currentVideo }) => {
   return (
     <div
       ref={videoContainerRef}
-      className={`video-container relative flex flex-col justify-center h-[70dvh] mx-auto group border border-red-800 ${
-        theaterMode ? " h-[78dvh]" : "max-w-[1000px] w-[68%]"
+      className={`video-container relative flex flex-col justify-center min-h-[60dvh] mx-auto group border border-red-800 ${
+        theaterMode
+          ? "lg:h-[78dvh] lg:w-full"
+          : "lg:max-w-[1000px] md:w-full lg:w-[68%]"
       }`}
     >
       <div className="video-controls-container absolute bottom-0 left-0 right-0 text-white z-50 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 ">
@@ -297,6 +300,13 @@ const VideoPlayer = ({ currentVideo }) => {
               </span>
             )}
           </button>
+          <button
+            onClick={playNext}
+            className="play-pause-btn bg-none border-none text-inherit p-0 h-[30px] w-[30px] text-[1.1rem] cursor-pointer opacity-85 transition-opacity duration-150 ease-in-outhover:opacity-100"
+          >
+            <SkipNextIcon style={{ fontSize: "28" }} />
+          </button>
+
           <div className="volume-container flex items-center">
             <button onClick={toggleMute} className="mute-btn">
               {getSpeakerIcon()}
@@ -349,6 +359,7 @@ const VideoPlayer = ({ currentVideo }) => {
       <video
         onLoadedData={setTotalVideoDuration}
         onTimeUpdate={setCurrentVideoDuration}
+        onEnded={playNext}
         onClick={togglePlay}
         ref={videoRef}
         className={`flex justify-center p-1 w-full h-full`}
@@ -356,7 +367,7 @@ const VideoPlayer = ({ currentVideo }) => {
         autoPlay
       ></video>
 
-      <div className="video-title-container text-lg font-bold  absolute top-0 left-0 right-0 pt-2 text-white z-50 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
+      <div className="video-title-container text-lg font-bold  absolute top-0 left-0 right-0 pt-2 text-white z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
         <span className="pl-2">{currentVideo?.title} </span>
       </div>
     </div>

@@ -1,17 +1,4 @@
 import { v4 as uuid } from "uuid";
-import HomeIcon from "@mui/icons-material/Home";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import HistoryIcon from "@mui/icons-material/History";
-import WatchLaterIcon from "@mui/icons-material/WatchLater";
-
-export const tabs = [
-  { name: "Home", icon: <HomeIcon />, link: "" },
-  { name: "Playlists", icon: <VideoLibraryIcon />, link: "playlists" },
-  { name: "Liked", icon: <FavoriteIcon />, link: "liked" },
-  { name: "History", icon: <HistoryIcon />, link: "history" },
-  { name: "Watch Later", icon: <WatchLaterIcon />, link: "watchLater" },
-];
 
 export const videos = [
   {

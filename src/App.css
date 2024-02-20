@@ -22,14 +22,20 @@
 /* volume controls */
 
 .volume-slider {
-  width: 0;
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+  width: 3rem;
 }
 
-.volume-container:hover .volume-slider,
-.volume-slider:focus-within {
-  width: 100px;
-  transform: scaleX(1);
+@media (min-width: 992px) {
+  .volume-slider {
+    width: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+  }
+
+  .volume-container:hover .volume-slider,
+  .volume-slider:focus-within {
+    width: 100px;
+    transform: scaleX(1);
+  }
 }
