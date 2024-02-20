@@ -108,8 +108,6 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
       videoContainerRef.current
         .requestFullscreen()
         .catch((error) => console.log(error));
-
-      console.log(videoContainerRef);
       setFullScreenMode(true);
     } else {
       document.exitFullscreen();
