@@ -4,7 +4,7 @@ This is an assignment solution for Rigi.
 [Assignment Link](https://gist.github.com/9267aakashsharma/4dd73769e9639f3d79fb07e40091ecec)
 
 ## Demo
-### [See Live](https://loop-videos.vercel.app/)
+### [See Live](http://loop-videos.vercel.app/)
 
 ## Screenshots
 
