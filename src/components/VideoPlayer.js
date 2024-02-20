@@ -51,6 +51,11 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
         case "k":
           togglePlay();
           break;
+        case "n":
+          if (e.shiftKey) {
+            toggleNextVideo();
+          }
+          break;
         case "f":
           toggleFullScreenMode();
           break;
@@ -83,7 +88,7 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
     // eslint-disable-next-line
-  }, [volume, prevVolume, isMuted, theaterMode]);
+  }, [playNext, volume, prevVolume, isMuted, theaterMode]);
 
   function togglePlay() {
     setIsPaused((prevState) => !prevState);
@@ -92,6 +97,10 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
     } else {
       videoRef.current.pause();
     }
+  }
+
+  function toggleNextVideo() {
+    playNext();
   }
 
   function toggleFullScreenMode() {
@@ -292,11 +301,11 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
           >
             {isPaused ? (
               <span>
-                <PauseIcon style={{ fontSize: "30" }} />
+                <PlayArrowIcon style={{ fontSize: "30" }} />
               </span>
             ) : (
               <span>
-                <PlayArrowIcon style={{ fontSize: "30" }} />
+                <PauseIcon style={{ fontSize: "30" }} />
               </span>
             )}
           </button>
@@ -365,6 +374,7 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
         className={`flex justify-center p-1 w-full h-full`}
         src={currentVideo?.sources[0]}
         autoPlay
+        poster={currentVideo?.thumb}
       ></video>
 
       <div className="video-title-container text-lg font-bold  absolute top-0 left-0 right-0 pt-2 text-white z-10 transition-opacity duration-300 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100">
