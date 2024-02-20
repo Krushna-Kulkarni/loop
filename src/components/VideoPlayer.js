@@ -297,7 +297,7 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
         <div className="controls flex gap-2 p-1 items-center">
           <button
             onClick={togglePlay}
-            className="play-pause-btn bg-none border-none text-inherit p-0 h-[30px] w-[30px] text-[1.1rem] cursor-pointer opacity-85 transition-opacity duration-150 ease-in-outhover:opacity-100"
+            className="play-pause-btn bg-none border-none text-inherit p-0 h-[30px] w-[30px] text-[1.1rem] cursor-pointer opacity-85 transition-opacity duration-150 ease-in-out hover:opacity-100"
           >
             {isPaused ? (
               <span>
@@ -311,13 +311,16 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
           </button>
           <button
             onClick={playNext}
-            className="play-pause-btn bg-none border-none text-inherit p-0 h-[30px] w-[30px] text-[1.1rem] cursor-pointer opacity-85 transition-opacity duration-150 ease-in-outhover:opacity-100"
+            className="playNext-btn bg-none border-none text-inherit p-0 h-[30px] w-[30px] text-[1.1rem] cursor-pointer opacity-85 hover:opacity-100"
           >
-            <SkipNextIcon style={{ fontSize: "28" }} />
+            <SkipNextIcon style={{ fontSize: "30" }} />
           </button>
 
           <div className="volume-container flex items-center">
-            <button onClick={toggleMute} className="mute-btn">
+            <button
+              onClick={toggleMute}
+              className="mute-btn bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
+            >
               {getSpeakerIcon()}
             </button>
             <input
@@ -336,21 +339,30 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
           </div>
           <button
             onClick={changePlaybackSpeed}
-            className="speed-btn w-12"
+            className="speed-btn w-12 bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
           >{`${speed}x`}</button>
           {!miniPlayerMode && (
-            <button onClick={toggleMiniPlayerMode} className="mini-player-btn">
+            <button
+              onClick={toggleMiniPlayerMode}
+              className="mini-player-btn bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
+            >
               <BrandingWatermarkOutlinedIcon style={{ fontSize: "28" }} />
             </button>
           )}
-          <button onClick={toggleTheaterMode} className="theater-btn">
+          <button
+            onClick={toggleTheaterMode}
+            className="theater-btn bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
+          >
             {theaterMode ? (
               <Crop169SharpIcon className="wide" style={{ fontSize: "28" }} />
             ) : (
               <Crop32SharpIcon className="tall" style={{ fontSize: "32" }} />
             )}
           </button>
-          <button onClick={toggleFullScreenMode} className="full-screen-btn">
+          <button
+            onClick={toggleFullScreenMode}
+            className="full-screen-btn bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
+          >
             {fullScreenMode ? (
               <FullscreenExitSharpIcon
                 className="close"
