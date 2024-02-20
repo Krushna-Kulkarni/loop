@@ -105,7 +105,11 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
 
   function toggleFullScreenMode() {
     if (document.fullscreenElement == null) {
-      videoContainerRef.current.requestFullscreen();
+      videoContainerRef.current
+        .requestFullscreen()
+        .catch((error) => console.log(error));
+
+      console.log(videoContainerRef);
       setFullScreenMode(true);
     } else {
       document.exitFullscreen();
@@ -351,7 +355,7 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
           )}
           <button
             onClick={toggleTheaterMode}
-            className="theater-btn bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
+            className="theater-btn hidden lg:block bg-none border-none text-inherit p-0 cursor-pointer opacity-85 hover:opacity-100"
           >
             {theaterMode ? (
               <Crop169SharpIcon className="wide" style={{ fontSize: "28" }} />
