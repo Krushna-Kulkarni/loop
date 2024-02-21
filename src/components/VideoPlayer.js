@@ -186,8 +186,9 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
     }
   };
 
-  function setTotalVideoDuration() {
+  function setIntialVideoData() {
     setTotalTime(formatDuration(videoRef.current.duration));
+    setIsPaused(videoRef.current.paused);
   }
   function setCurrentVideoDuration() {
     setCurrentTime(formatDuration(videoRef.current.currentTime));
@@ -380,7 +381,7 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
         </div>
       </div>
       <video
-        onLoadedData={setTotalVideoDuration}
+        onLoadedData={setIntialVideoData}
         onTimeUpdate={setCurrentVideoDuration}
         onEnded={playNext}
         onClick={togglePlay}
