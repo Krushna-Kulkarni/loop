@@ -10,17 +10,18 @@ This is an assignment solution for Rigi.
 
 Desktop
 
-![image](https://github.com/Krushna-Kulkarni/loop/assets/62604823/8e781ab7-18f0-42de-8a30-4c123d00f000)
+![image](https://github.com/Krushna-Kulkarni/loop/assets/62604823/585359f2-7947-453a-8db7-d496d8906abd)
 
 
 Tablet
 
-![image](https://github.com/Krushna-Kulkarni/loop/assets/62604823/6c0d9f32-fb2f-4df3-a60c-7ced40cdd221)
+![image](https://github.com/Krushna-Kulkarni/loop/assets/62604823/261740a3-7aef-407f-8909-ff7046c9d234)
 
 
 Mobile
 
-![image](https://github.com/Krushna-Kulkarni/loop/assets/62604823/bdcaa07a-853e-45a9-bde2-464708417c4c)
+![image](https://github.com/Krushna-Kulkarni/loop/assets/62604823/34630c57-28ce-4933-9046-b22ed9689bcb)
+
 
 
 ## Install and Run Locally
