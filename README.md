@@ -1,5 +1,5 @@
 
-⚠️ If You are here for checking the assignment for Rigi [go here](https://github.com/Krushna-Kulkarni/loop/tree/assignment)
+⚠️ If you are here for checking the assignment for Rigi - [go here](https://github.com/Krushna-Kulkarni/loop/tree/assignment)
 # Loop
 Loop is a video library consisting curated videos on various topics.
 
