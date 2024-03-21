@@ -37,7 +37,7 @@ const VideoDetail = () => {
       <div className="flex flex-col items-center w-full lg:w-[68%]">
         <VideoPlayer currentVideo={currentVideo} playNext={playNext} />
 
-        <div className="flex flex-col justify-start py-2  px-8 w-full">
+        <div className="flex flex-col justify-start pt-2 pb-4 md:py-2 px-2 md:px-8 w-full">
           <span className="text-lg font-bold">{currentVideo?.title} </span>
           <span className="text-xs text-zinc-200">
             {currentVideo?.subtitle?.slice(3)}
