@@ -235,7 +235,13 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
 
     if (!isScrubbing) {
       videoRef.current.currentTime = percent * videoRef.current.duration;
-      if (!videoRef.current.paused) videoRef.current.play();
+      if (!videoRef.current.paused) {
+        setIsPaused(false);
+        videoRef.current.play();
+      } else {
+        setIsPaused(true);
+        videoRef.current.pause();
+      }
     }
 
     handleTimelineUpdate(e);
@@ -252,6 +258,7 @@ const VideoPlayer = ({ currentVideo, playNext }) => {
       const newTime = percent * videoRef.current.duration;
       setProgressPosition(percent);
       videoRef.current.currentTime = newTime;
+      if (!videoRef.current.paused) setIsPaused(false);
     }
   }
 
